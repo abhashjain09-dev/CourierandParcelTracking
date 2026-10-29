@@ -29,7 +29,21 @@ public class Person {
     public void setEmail(String v)   { this.email = v; }
 
     public String getFullAddress() {
-        return address + ", " + city + ", " + state + " - " + pincode;
+        StringBuilder sb = new StringBuilder();
+        if (address != null && !address.trim().isEmpty()) sb.append(address.trim());
+        if (city != null && !city.trim().isEmpty()) {
+            if (sb.length() > 0) sb.append(", ");
+            sb.append(city.trim());
+        }
+        if (state != null && !state.trim().isEmpty()) {
+            if (sb.length() > 0) sb.append(", ");
+            sb.append(state.trim());
+        }
+        if (pincode != null && !pincode.trim().isEmpty()) {
+            if (sb.length() > 0) sb.append(" - ");
+            sb.append(pincode.trim());
+        }
+        return sb.length() > 0 ? sb.toString() : "N/A";
     }
 
     @Override
