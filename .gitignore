@@ -22,3 +22,12 @@ target/
 # OS files
 .DS_Store
 Thumbs.db
+
+
+# SQLite database file
+*.db
+
+# Temp build files
+sources.txt
+MANIFEST.MF
+

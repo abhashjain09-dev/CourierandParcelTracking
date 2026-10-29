@@ -14,7 +14,7 @@ for /r "src\main\java" %%f in (*.java) do (
 )
 
 echo Compiling Java sources...
-javac -cp "lib\sqlite-jdbc.jar" -d "out\classes" @sources.txt
+javac -cp "lib\sqlite-jdbc.jar;lib\slf4j-api.jar;lib\slf4j-nop.jar" -d "out\classes" @sources.txt
 del sources.txt
 
 if errorlevel 1 (
@@ -25,7 +25,7 @@ if errorlevel 1 (
 
 echo Creating manifest...
 echo Main-Class: com.courier.Main> MANIFEST.MF
-echo Class-Path: lib/sqlite-jdbc.jar>> MANIFEST.MF
+echo Class-Path: lib/sqlite-jdbc.jar lib/slf4j-api.jar lib/slf4j-nop.jar>> MANIFEST.MF
 
 echo Packaging JAR...
 jar cfm CourierTrackingSystem.jar MANIFEST.MF -C "out\classes" .
