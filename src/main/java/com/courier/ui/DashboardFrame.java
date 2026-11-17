@@ -1,4 +1,4 @@
-package com.courier.view;
+package com.courier.ui;
 
 import com.courier.controller.ShipmentController;
 import com.courier.database.DatabaseManager;

@@ -25,9 +25,11 @@ A complete desktop-based **Courier and Parcel Tracking System** built with **Jav
 The project strictly follows the standard Maven layout organized by MVC layers:
 
 ```text
-CourierParcelTracking/
+CourierTrackingSystem/
 ├── pom.xml                                    # Maven configuration and dependencies
 ├── README.md                                  # Complete project documentation
+├── run.bat
+├── .gitignore
 │
 ├── data/
 │   └── courier.db                             # Local SQLite database file (created automatically)
@@ -45,7 +47,7 @@ CourierParcelTracking/
 │   │   │           │   ├── StatusLog.java     # Chronological tracking history record
 │   │   │           │   └── ShipmentStatus.java# Status enum (DISPATCHED, IN_TRANSIT, DELIVERED, etc.)
 │   │   │           │
-│   │   │           ├── view/                  # [VIEW LAYER] Java Swing presentation components
+│   │   │           ├── ui/                    # [VIEW LAYER] Java Swing presentation components
 │   │   │           │   ├── DashboardFrame.java# Main application window (Dashboard & Table)
 │   │   │           │   ├── ShipmentForm.java  # Dispatch input form with live ETA preview
 │   │   │           │   ├── TrackingPanel.java # Visual tracker & 4-stage progress stepper
@@ -54,12 +56,13 @@ CourierParcelTracking/
 │   │   │           ├── controller/            # [CONTROLLER LAYER] Business logic & event coordination
 │   │   │           │   └── ShipmentController.java # Validates input and coordinates requests
 │   │   │           │
-│   │   │           ├── dao/                   # [DAO LAYER] JDBC Data Access Objects
+│   │   │           ├── database/              # [DATABASE LAYER] Connection, schema, and JDBC DAOs
+│   │   │           │   ├── DatabaseManager.java# SQLite JDBC connection & schema initializer
 │   │   │           │   ├── ShipmentDAO.java   # Parameterized SQL queries for shipments
 │   │   │           │   └── StatusLogDAO.java  # SQL queries for audit history logs
 │   │   │           │
-│   │   │           ├── database/              # [DATABASE LAYER] Connection & directory management
-│   │   │           │   └── DatabaseManager.java# SQLite JDBC connection & schema initializer
+│   │   │           ├── service/               # [SERVICE LAYER] Shipment business logic
+│   │   │           │   └── ShipmentService.java
 │   │   │           │
 │   │   │           └── util/                  # [UTILITY LAYER]
 │   │   │               └── TrackingNumberGenerator.java # Generates unique tracking IDs
@@ -81,9 +84,9 @@ CourierParcelTracking/
 | MVC Component | Files | Responsibility |
 | :--- | :--- | :--- |
 | **Model** | `Shipment.java`, `Person.java`, `StatusLog.java`, `ShipmentStatus.java` | Represents shipment data, sender/receiver details, and status enumeration. |
-| **View** | `DashboardFrame.java`, `ShipmentForm.java`, `TrackingPanel.java`, `UITheme.java` | Displays the graphical user interface, renders status badges and steppers, and accepts user input. **Does not execute SQL directly.** |
+| **View** | `ui/DashboardFrame.java`, `ui/ShipmentForm.java`, `ui/TrackingPanel.java`, `ui/UITheme.java` | Displays the graphical user interface, renders status badges and steppers, and accepts user input. **Does not execute SQL directly.** |
 | **Controller** | `ShipmentController.java` | Handles GUI events, performs input validation, enforces state transition rules, coordinates with the DAO, and updates the View. |
-| **Database Layer (DAO)** | `ShipmentDAO.java`, `StatusLogDAO.java`, `DatabaseManager.java` | Manages the SQLite database connection (`courier.db`) and executes parameterized SQL statements using JDBC. |
+| **Database Layer (DAO)** | `database/ShipmentDAO.java`, `database/StatusLogDAO.java`, `database/DatabaseManager.java` | Manages the SQLite database connection (`courier.db`) and executes parameterized SQL statements using JDBC. |
 | **Entry Point** | `Main.java` | Initializes the database, wires the DAO, Controller, and View layers together, and launches the application on the Swing Event Dispatch Thread (EDT). |
 
 ---

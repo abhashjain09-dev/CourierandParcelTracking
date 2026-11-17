@@ -1,9 +1,9 @@
 package com.courier;
 
 import com.courier.controller.ShipmentController;
-import com.courier.dao.ShipmentDAO;
-import com.courier.dao.StatusLogDAO;
 import com.courier.database.DatabaseManager;
+import com.courier.database.ShipmentDAO;
+import com.courier.database.StatusLogDAO;
 import com.courier.model.Person;
 import com.courier.model.Shipment;
 import com.courier.model.ShipmentStatus;

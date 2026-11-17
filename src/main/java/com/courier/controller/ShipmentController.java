@@ -1,12 +1,12 @@
 package com.courier.controller;
 
-import com.courier.dao.ShipmentDAO;
-import com.courier.dao.StatusLogDAO;
+import com.courier.database.ShipmentDAO;
+import com.courier.database.StatusLogDAO;
 import com.courier.model.Shipment;
 import com.courier.model.ShipmentStatus;
 import com.courier.model.StatusLog;
 import com.courier.util.TrackingNumberGenerator;
-import com.courier.view.DashboardFrame;
+import com.courier.ui.DashboardFrame;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
